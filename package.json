@@ -2,7 +2,9 @@
   "name": "@keyrxng/testpkg",
   "version": "1.0.0",
   "description": "Template repository with TypeScript support.",
-  "main": "build/index.ts",
+  "main": "dist/cjs/rpc-handler.js",
+  "module": "dist/esm/rpc-handler.js",
+  "types": "index.d.ts",
   "author": "Keyrxng",
   "license": "MIT",
   "engines": {
@@ -10,14 +12,16 @@
   },
   "scripts": {
     "start": "tsx build/esbuild-server.ts",
-    "build": "tsx build/esbuild-build.ts",
     "format": "run-s format:lint format:prettier format:cspell",
     "format:lint": "eslint --fix .",
     "format:prettier": "prettier --write .",
     "format:cspell": "cspell **/*",
     "knip": "knip",
     "knip-ci": "knip --no-exit-code --reporter json",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:cjs": "tsc --project tsconfig.node.json",
+    "build:esm": "tsc --project tsconfig.web.json",
+    "build": "tsx build/esbuild-build.ts && npm run build:cjs && npm run build:esm"
   },
   "keywords": [
     "typescript",
@@ -27,7 +31,10 @@
     "open-source"
   ],
   "dependencies": {
-    "dotenv": "^16.4.4"
+    "@ethersproject/providers": "^5.7.2",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.4",
+    "ethers": "^5.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.1",

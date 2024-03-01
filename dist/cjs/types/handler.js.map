@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../src/types/handler.ts"],
+  "sourcesContent": ["import { JsonRpcProvider } from \"@ethersproject/providers\";\r\n\r\nexport type DataType = {\r\n  jsonrpc: string;\r\n  id: number;\r\n  result: {\r\n    number: string;\r\n    timestamp: string;\r\n    hash: string;\r\n  };\r\n};\r\n\r\nexport type HandlerInterface = {\r\n  _networkId: number;\r\n  _refreshLatencies: number;\r\n  _latencies: Record<string | number, number>;\r\n  _runtimeRpcs: string[];\r\n  _env: string;\r\n  getProvider(): JsonRpcProvider;\r\n  clearInstance(): void;\r\n  clearLatencies(): void;\r\n  clearRefreshLatencies(): void;\r\n  getFastestRpcProvider(networkId?: number): Promise<JsonRpcProvider>;\r\n  testRpcPerformance(networkId: number): Promise<void>;\r\n};\r\n"],
+  "mappings": "+WAAA,IAAAA,EAAA,kBAAAC,EAAAD",
+  "names": ["handler_exports", "__toCommonJS"]
+}
